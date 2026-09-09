@@ -6,6 +6,15 @@
   <title>Calendar | IEEE CSUN</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
   <script type="text/javascript" src="js" defer></script>
+  <script>
+    /* Runs before first paint so a stored dark theme does not flash light. */
+    try {
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("darkmode");
+      }
+    } catch (e) {}
+  </script>
+
 </head>
 
 <body id="cuerpo">
@@ -15,10 +24,6 @@
       <a class="logo logo-only" href="index.html">
   <img src="assets/img/brand/ieee-csun-logo.png" alt="IEEE CSUN">
 </a>
-<button class="nav-theme" id="classChangeButton" data-theme-toggle="" aria-pressed="false" type="button">
-        Dark mode
-      </button>
-
       <nav class="nav-links">
         <a href="about.html">About</a>
         <a href="events.html">Events</a>
@@ -27,6 +32,9 @@
       </nav>
 
       <a class="nav-cta" href="join.html">Get started</a>
+      <button class="nav-theme" id="classChangeButton" data-theme-toggle="" aria-pressed="false" type="button">
+        Dark mode
+      </button>
     </div>
   </header>
 

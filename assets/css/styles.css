@@ -35,7 +35,7 @@
   --me-mori:#435180;
 }
 
-.darkmode{
+:root.darkmode{
   /* Brand */
   --ieee-blue: #00629B;   /* IEEE blue */
   --csun-red: #ba0c2f;    /* keep your existing red */
@@ -1329,7 +1329,7 @@ body.theme-light .home-logo{
   border-color: rgba(10,18,34,.10);
   background: rgba(255,255,255,.80);
 }
-/* Theme toggle button (fits nav) */
+/* Theme toggle button (fits nav, last item so it sits top-right) */
 .nav-theme{
   background: rgba(95, 83, 83, 0.412);
   border: 1px solid rgba(255,255,255,.16);
