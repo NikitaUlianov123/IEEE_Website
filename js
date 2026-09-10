@@ -6,15 +6,59 @@ document.getElementById("year")?.append(new Date().getFullYear());
 // -------------------------
 // Theme toggle (light/dark)
 // -------------------------
-// -------------------------
-// Theme toggle (light/dark)
-// -------------------------
-const button = document.getElementById('classChangeButton');
-const body = document.getElementById('cuerpo');
-button.addEventListener('click', function() {
-    body.classList.toggle('darkmode');
-    localStorage.setItem('cuerpo','darkmode');
-});
+// The class lives on <html>, not <body>, so the inline <head> bootstrap on each
+// page can apply the stored theme before the first paint.
+(function initTheme() {
+  const root = document.documentElement;
+  const button = document.getElementById("classChangeButton");
+
+  const readStored = () => {
+    try {
+      return localStorage.getItem("theme");
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const store = (value) => {
+    try {
+      localStorage.setItem("theme", value);
+    } catch (e) {
+      // Private browsing / blocked storage: the theme just will not persist.
+    }
+  };
+
+  const apply = (isDark) => {
+    root.classList.toggle("darkmode", isDark);
+
+    if (!button) {
+      return;
+    }
+
+    if (isDark) {
+      button.textContent = "Light mode";
+      button.setAttribute("aria-pressed", "true");
+    } else {
+      button.textContent = "Dark mode";
+      button.setAttribute("aria-pressed", "false");
+    }
+  };
+
+  apply(readStored() === "dark");
+
+  if (button) {
+    button.addEventListener("click", () => {
+      const isDark = !root.classList.contains("darkmode");
+      apply(isDark);
+
+      if (isDark) {
+        store("dark");
+      } else {
+        store("light");
+      }
+    });
+  }
+})();
 
 
 
