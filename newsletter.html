@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calendar | IEEE CSUN</title>
+  <title>Newsletter | IEEE CSUN</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
   <script type="text/javascript" src="js" defer></script>
 </head>
@@ -22,7 +22,7 @@
       <nav class="nav-links">
         <a href="about.html">About</a>
         <a href="events.html">Events</a>
-        <a href="calendar.html" aria-current="page">Calendar</a>
+        <a href="calendar.html">Calendar</a>
         <a href="contact.html">Contact</a>
       </nav>
 
@@ -30,41 +30,51 @@
     </div>
   </header>
 
-  <main class="calendar-page">
-    <!-- Header -->
-    <section class="calendar-hero">
-      <div class="container calendar-hero-inner">
-        <h1 class="calendar-title">IEEE CSUN Calendar</h1>
-        <p class="calendar-subtitle">
-          All events, workshops, project nights, and important dates.
+  <main class="newsletter-page">
+    <section class="nl-hero">
+      <div class="container nl-hero-inner">
+        <h1 class="nl-title">Newsletter</h1>
+        <p class="nl-subtitle">
+          Club announcements, event reminders, and deadlines. One email, no more than
+          a few times a month.
         </p>
+
+        <div class="nl-banner" id="nl-subscribed-banner" role="status" hidden>
+          <strong>Almost done.</strong> Check your inbox and click the confirmation
+          link to finish subscribing.
+        </div>
+
+        <form class="nl-form nl-form--wide" data-newsletter-form method="post">
+          <label class="nl-label" for="nl-email-page">Email address</label>
+          <div class="nl-row">
+            <input class="nl-input" id="nl-email-page" type="email"
+                   data-newsletter-email required autocomplete="email"
+                   placeholder="you@my.csun.edu" disabled>
+            <button class="btn primary nl-submit" type="submit" disabled>Subscribe</button>
+          </div>
+          <p class="nl-note" data-newsletter-note hidden></p>
+        </form>
+
+        <noscript>
+          <p class="nl-note">
+            Turn on JavaScript to subscribe, or email
+            <a class="inline-link" href="mailto:ie.ee@csun.edu">ie.ee@csun.edu</a>
+            and we will add you to the list.
+          </p>
+        </noscript>
       </div>
     </section>
 
-    <!-- Calendar -->
-    <section class="calendar-section">
+    <section class="nl-archive-section">
       <div class="container">
-        <div class="calendar-card">
-          <iframe
-            title="IEEE CSUN Google Calendar"
-            src="https://calendar.google.com/calendar/embed?src=ie.ee%40my.csun.edu&ctz=America%2FLos_Angeles"
-            frameborder="0"
-            scrolling="no"
-            loading="lazy"
-          ></iframe>
+        <div class="section-head">
+          <h2 class="section-title">Past issues</h2>
+          <p class="section-subtitle">Everything we have sent, newest first.</p>
         </div>
 
-        <!-- Optional helper -->
-        <div class="calendar-actions">
-          <a
-            class="btn secondary"
-            href="https://calendar.google.com/calendar/u/0/r?cid=YW9sYW55LmFjb3N0YS4wMTVAbXkuY3N1bi5lZHU"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open in Google Calendar
-          </a>
-
+        <div class="nl-archive" id="newsletter-archive">
+          <!-- Loading state -->
+          <div class="nl-archive-msg">Loading past issues...</div>
         </div>
       </div>
     </section>

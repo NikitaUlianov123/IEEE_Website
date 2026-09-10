@@ -1575,3 +1575,176 @@ body.theme-light .nav-theme{
 .logo-only img{
   height: 36px;
 }
+
+/* =========================================================
+   Site footer + newsletter
+   Colours come from the theme variables only, so this block
+   follows :root.darkmode with no separate dark rules.
+   ========================================================= */
+.site-footer{
+  margin-top: 60px;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+}
+.footer-inner{
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr .8fr;
+  gap: 34px;
+  padding: 42px 0 30px;
+}
+.footer-about{ display:flex; flex-direction:column; gap:12px; }
+.footer-logo{ height: 40px; width:auto; }
+.footer-tagline{
+  margin:0;
+  color: var(--muted);
+  max-width: 34ch;
+  line-height: 1.6;
+}
+.footer-heading{
+  margin: 0 0 6px;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+.footer-sub{
+  margin: 0 0 14px;
+  color: var(--muted);
+  max-width: 44ch;
+  line-height: 1.6;
+}
+.footer-nav .footer-heading{ margin-bottom: 10px; }
+.footer-list{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+.footer-list a{
+  text-decoration:none;
+  color: var(--muted);
+  font-weight: 700;
+}
+.footer-list a:hover{ color: var(--text); }
+.footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 16px 0 26px;
+  border-top: 1px solid var(--line2);
+  color: var(--muted);
+}
+.footer-copy{ margin:0; }
+
+/* Signup form ------------------------------------------------ */
+.nl-form{ margin:0; }
+.nl-label{
+  display:block;
+  margin-bottom: 8px;
+  font-weight: 750;
+  color: var(--text);
+  font-size: .92rem;
+}
+.nl-row{ display:flex; gap:10px; flex-wrap:wrap; }
+.nl-input{
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel2);
+  color: var(--text);
+  font: inherit;
+}
+.nl-input::placeholder{ color: var(--muted); }
+.nl-input:focus-visible,
+.nl-submit:focus-visible{
+  outline: 2px solid var(--ieee-blue);
+  outline-offset: 2px;
+}
+.nl-submit{ cursor:pointer; font: inherit; font-weight: 900; }
+.nl-input:disabled,
+.nl-submit:disabled{ opacity: .55; cursor: not-allowed; }
+.nl-note{
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+.nl-note[hidden]{ display:none; }
+
+/* EmailOctopus spam trap. Hidden from people, still submitted by bots. */
+.nl-hp{
+  position:absolute;
+  left:-9999px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+/* Newsletter page -------------------------------------------- */
+.nl-hero{ padding: 54px 0 28px; }
+.nl-hero-inner{ display:flex; flex-direction:column; gap:14px; max-width: 720px; }
+.nl-title{
+  margin:0;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--text);
+}
+.nl-subtitle{ margin:0; color: var(--muted); line-height:1.65; }
+.nl-form--wide .nl-input{ flex-basis: 320px; }
+.nl-banner{
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--panel2);
+  color: var(--text);
+  line-height: 1.55;
+}
+.nl-banner[hidden]{ display:none; }
+
+/* Archive ----------------------------------------------------- */
+.nl-archive-section{ padding: 10px 0 70px; }
+.nl-archive{ display:grid; gap:14px; margin-top: 18px; }
+.nl-archive-msg{
+  text-align:center;
+  padding: 30px;
+  color: var(--muted);
+}
+.nl-issue{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+}
+.nl-issue-date{
+  color: var(--muted);
+  font-size: .85rem;
+  font-weight: 750;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+.nl-issue-title{
+  margin: 6px 0 8px;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+.nl-issue-summary{ margin:0; color: var(--muted); line-height:1.65; }
+.nl-issue-body{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.nl-issue-link{ display:inline-block; margin-top: 12px; }
+
+@media (max-width: 900px){
+  .footer-inner{ grid-template-columns: 1fr 1fr; }
+  .footer-nav{ grid-column: 1 / -1; }
+}
+@media (max-width: 640px){
+  .footer-inner{ grid-template-columns: 1fr; gap: 26px; padding: 32px 0 24px; }
+  .footer-bottom{ justify-content:flex-start; }
+  .nl-row{ flex-direction: column; align-items: stretch; }
+  .nl-submit{ justify-content:center; }
+}
