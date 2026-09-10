@@ -203,8 +203,7 @@ const escapeHtml = (value) => {
 
     if (!configured) {
       if (note) {
-        note.textContent =
-          "Signups open shortly. Email ie.ee@csun.edu and we will add you in the meantime.";
+        note.textContent = "Signups are not open yet.";
         note.hidden = false;
       }
       return;
@@ -311,7 +310,7 @@ const escapeHtml = (value) => {
     }
 
     if (issues.length === 0) {
-      showMessage("No issues yet. Subscribe above and you will get the first one.");
+      showMessage("No issues yet.");
       return;
     }
 
