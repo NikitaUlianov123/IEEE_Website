@@ -165,17 +165,12 @@ button.addEventListener('click', function() {
 
 
 // -------------------------
-// Newsletter (signup + archive)
+// Newsletter (archive)
 // -------------------------
-// Paste both values from the EmailOctopus dashboard once the club list exists.
-// Lists > (your list) > Forms > Embedded shows them in the generated snippet:
-// the <form action> URL, and the name of its email <input>.
-// While formAction is empty every signup form stays disabled and says so, so the
-// live site never shows a form that looks usable but silently fails.
+// Signup is EmailOctopus's own embed script on newsletter.html, not code here.
+// Their endpoint answers with JSON and requires a reCAPTCHA token that only their
+// script obtains, so a plain form POST from our markup cannot subscribe anyone.
 const NEWSLETTER_CONFIG = {
-  formAction: "",
-  emailFieldName: "field_0",
-  honeypotFieldName: "",
   archiveUrl: "assets/data/newsletter.json"
 };
 
@@ -187,51 +182,6 @@ const escapeHtml = (value) => {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 };
-
-(function initNewsletterSignup() {
-  const forms = document.querySelectorAll("[data-newsletter-form]");
-  if (!forms.length) {
-    return;
-  }
-
-  const configured = NEWSLETTER_CONFIG.formAction.length > 0;
-
-  forms.forEach((form) => {
-    const input = form.querySelector("[data-newsletter-email]");
-    const submit = form.querySelector('[type="submit"]');
-    const note = form.querySelector("[data-newsletter-note]");
-
-    if (!configured) {
-      if (note) {
-        note.textContent = "Signups are not open yet.";
-        note.hidden = false;
-      }
-      return;
-    }
-
-    form.action = NEWSLETTER_CONFIG.formAction;
-
-    if (input) {
-      input.name = NEWSLETTER_CONFIG.emailFieldName;
-      input.disabled = false;
-    }
-
-    if (submit) {
-      submit.disabled = false;
-    }
-
-    if (NEWSLETTER_CONFIG.honeypotFieldName.length > 0) {
-      const trap = document.createElement("input");
-      trap.type = "text";
-      trap.name = NEWSLETTER_CONFIG.honeypotFieldName;
-      trap.className = "nl-hp";
-      trap.tabIndex = -1;
-      trap.autocomplete = "off";
-      trap.setAttribute("aria-hidden", "true");
-      form.appendChild(trap);
-    }
-  });
-})();
 
 (function initNewsletterBanner() {
   const banner = document.getElementById("nl-subscribed-banner");

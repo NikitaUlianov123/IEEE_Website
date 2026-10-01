@@ -1633,51 +1633,32 @@ body.theme-light .nav-theme{
 }
 .footer-copy{ margin:0; }
 
-/* Signup form ------------------------------------------------ */
-.nl-form{ margin:0; }
-.nl-label{
-  display:block;
-  margin-bottom: 8px;
-  font-weight: 750;
-  color: var(--text);
-  font-size: .92rem;
-}
-.nl-row{ display:flex; gap:10px; flex-wrap:wrap; }
-.nl-input{
-  flex: 1 1 220px;
-  min-width: 0;
-  padding: 12px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: var(--panel2);
-  color: var(--text);
-  font: inherit;
-}
-.nl-input::placeholder{ color: var(--muted); }
-.nl-input:focus-visible,
-.nl-submit:focus-visible{
-  outline: 2px solid var(--ieee-blue);
-  outline-offset: 2px;
-}
-.nl-submit{ cursor:pointer; font: inherit; font-weight: 900; }
-.nl-input:disabled,
-.nl-submit:disabled{ opacity: .55; cursor: not-allowed; }
+/* Signup embed ----------------------------------------------- */
 .nl-note{
   margin: 10px 0 0;
   color: var(--muted);
   font-size: .9rem;
   line-height: 1.5;
 }
-.nl-note[hidden]{ display:none; }
 
-/* EmailOctopus spam trap. Hidden from people, still submitted by bots. */
-.nl-hp{
-  position:absolute;
-  left:-9999px;
-  width:1px;
-  height:1px;
-  overflow:hidden;
+/* EmailOctopus injects its form with its own colour variables. The #subscribe
+   id outranks its [data-form] selectors, so these map it onto the site tokens
+   and it follows the dark toggle. */
+#subscribe [data-form]{
+  --text-colour: var(--text);
+  --font-family: inherit;
 }
+#subscribe .emailoctopus-form{
+  --field-colour: var(--panel2);
+  --field-border-colour: var(--line);
+  --label-colour: var(--text);
+  --button-colour: var(--csun-red);
+  --button-text-colour: #fff;
+  --eo-form-placeholder: var(--muted);
+  --eo-form-font-color: var(--text);
+}
+#subscribe .emailoctopus-form input:not([type=submit]){ color: var(--text); }
+#subscribe .mastfoot p{ color: var(--muted); }
 
 /* Newsletter page -------------------------------------------- */
 .nl-hero{ padding: 54px 0 28px; }
@@ -1689,7 +1670,6 @@ body.theme-light .nav-theme{
   color: var(--text);
 }
 .nl-subtitle{ margin:0; color: var(--muted); line-height:1.65; }
-.nl-form--wide .nl-input{ flex-basis: 320px; }
 .nl-banner{
   padding: 14px 16px;
   border-radius: 14px;
@@ -1745,6 +1725,4 @@ body.theme-light .nav-theme{
 @media (max-width: 640px){
   .footer-inner{ grid-template-columns: 1fr; gap: 26px; padding: 32px 0 24px; }
   .footer-bottom{ justify-content:flex-start; }
-  .nl-row{ flex-direction: column; align-items: stretch; }
-  .nl-submit{ justify-content:center; }
 }
