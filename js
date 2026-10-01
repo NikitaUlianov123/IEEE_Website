@@ -255,6 +255,11 @@ const escapeHtml = (value) => {
   // Only http(s) permalinks become links, so a bad feed value cannot become a
   // javascript: href.
   const safeLink = (value) => {
+    // An empty value would resolve to the current page and render as a link
+    // back to itself.
+    if (String(value).trim().length === 0) {
+      return "";
+    }
     try {
       const parsed = new URL(value, window.location.href);
       if (parsed.protocol === "http:" || parsed.protocol === "https:") {

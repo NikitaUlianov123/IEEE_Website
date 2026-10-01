@@ -17,6 +17,9 @@ concurrency:
 
 permissions:
   contents: write
+  # A push made with GITHUB_TOKEN does not start a Pages build, so the job
+  # requests one itself after committing.
+  pages: write
 
 jobs:
   build:
@@ -37,6 +40,7 @@ jobs:
         run: node scripts/build-newsletter-archive.mjs
 
       - name: Commit when the archive changed
+        id: commit
         run: |
           if git diff --quiet -- assets/data/newsletter.json; then
             echo "No archive change. Nothing to commit."
@@ -48,3 +52,10 @@ jobs:
           git add assets/data/newsletter.json
           git commit -m "Update newsletter archive"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Request a Pages build
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"

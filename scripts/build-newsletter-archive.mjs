@@ -101,9 +101,9 @@ const fetchSentCampaigns = async () => {
 
     collected.push(...page);
 
-    // Follow the cursor while one is present.
-    if (payload.paging && payload.paging.next) {
-      url = payload.paging.next;
+    // paging.next is an object carrying the full next-page URL, not a string.
+    if (payload.paging && payload.paging.next && payload.paging.next.url) {
+      url = payload.paging.next.url;
     } else {
       url = "";
     }
@@ -114,12 +114,15 @@ const fetchSentCampaigns = async () => {
   });
 };
 
+// The API has no hosted web-version URL for a campaign, so url stays empty and
+// the site shows the full body text instead of a link. name is the internal
+// label in the dashboard; subject is what subscribers actually saw.
 const toIssue = (campaign) => {
   const bodyText = toPlainText(campaign.content?.plain_text || campaign.content?.html || "");
 
   return {
     id: String(campaign.id),
-    title: campaign.name || campaign.subject || "Untitled issue",
+    title: campaign.subject || campaign.name || "Untitled issue",
     date: campaign.sent_at || campaign.created_at || null,
     summary: toSummary(bodyText),
     bodyText,
